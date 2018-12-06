@@ -41,17 +41,13 @@ echo          ****************************************************
 echo(
 echo 		 Choose what you need to work on.
 echo(
-echo 		][********************************][
-echo 		][ 1.  SEND TO MACHINE            ][
-echo 		][********************************][
-echo 		][ 2.  RECEIVE FROM MACHINE       ][
-echo 		][********************************][
-echo 		][ 3.  SETTINGS                   ][
-echo 		][********************************][
-echo 		][ 4.  PARAMETERS                 ][
-echo 		][********************************][
-echo 		][ 5.  EXIT                       ][
-echo 		][********************************][
+echo 	][******************************************************][
+echo 	][ 1.  SEND TO MACHINE  ][ 2.  RECEIVE FROM MACHINE     ][
+echo 	][******************************************************][
+echo 	][ 3.  SETTINGS         ][ 4.  PARAMETERS               ][
+echo 	][******************************************************][
+echo 	][ 5.                 EXIT                              ][
+echo 	][******************************************************][
 echo(
 CHOICE  /C 12345 /M "Choose Operation"
 IF ERRORLEVEL 5 goto exit
