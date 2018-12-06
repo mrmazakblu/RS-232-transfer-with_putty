@@ -7,10 +7,10 @@ IF EXIST "%~dp0\bin" SET PATH=%PATH%;"%~dp0\bin"
 IF EXIST "%~dp0\putty" SET PATH=%PATH%;"%~dp0\putty"
 IF NOT EXIST "%~dp0\from-machine" mkdir "%~dp0\from-machine"
 IF NOT EXIST "%~dp0\to-machine" mkdir "%~dp0\to-machine"
-set baud=9600
-set stop=1
-set data=8
-set parity=n
+set baud=4800
+set stop=2
+set data=7
+set parity=e
 set flow=X
 set com=1
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -43,11 +43,14 @@ echo 		][ 2.  RECEIVE FROM MACHINE       ][
 echo 		][********************************][
 echo 		][ 3.  SETTINGS                   ][
 echo 		][********************************][
-echo 		][ 4.  EXIT                       ][
+echo 		][ 4.  PARAMETERS                 ][
+echo 		][********************************][
+echo 		][ 5.  EXIT                       ][
 echo 		][********************************][
 echo(
-CHOICE  /C 1234 /M "Choose Operation"
-IF ERRORLEVEL 4 goto exit
+CHOICE  /C 12345 /M "Choose Operation"
+IF ERRORLEVEL 5 goto exit
+IF ERRORLEVEL 4 goto params
 IF ERRORLEVEL 3 goto settings
 IF ERRORLEVEL 2 start receive-file.bat && goto main
 IF ERRORLEVEL 1 start send-file.bat && goto main
@@ -136,6 +139,14 @@ IF ERRORLEVEL 4 set stop=D && GOTO main
 IF ERRORLEVEL 3 set stop=X && GOTO main
 IF ERRORLEVEL 2 set stop=N && GOTO main
 IF ERRORLEVEL 1 set stop=R && GOTO main
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:params
+cls
+CHOICE  /C 123 /M " 1= T-Plus  2= M-Plus  3= 640 "
+IF ERRORLEVEL 3 call %~dp0bin\640-params.bat || goto main
+IF ERRORLEVEL 2 call %~dp0bin\M-plus-params.bat || goto main
+IF ERRORLEVEL 1 call %~dp0bin\T-plus-params.bat || goto main
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :exit
