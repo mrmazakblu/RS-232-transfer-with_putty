@@ -7,6 +7,11 @@ IF EXIST "%~dp0\bin" SET PATH=%PATH%;"%~dp0\bin"
 IF EXIST "%~dp0\putty" SET PATH=%PATH%;"%~dp0\putty"
 IF NOT EXIST "%~dp0\from-machine" mkdir "%~dp0\from-machine"
 IF NOT EXIST "%~dp0\to-machine" mkdir "%~dp0\to-machine"
+echo CHECKING FOR NEWEST VERSION
+"%~dp0bin\wget" -O "%~dp0bin\current_version.txt" https://raw.githubusercontent.com/mrmazakblu/RS-232-transfer-with_putty/master/bin/current_version.txt
+< "%~dp0bin\current_version.txt" ( set /p "newver=" )
+IF "%newver%" == "" SET newver=Failed_To_Retreave
+set ver=V-3
 set baud=4800
 set stop=2
 set data=7
@@ -21,7 +26,7 @@ cls && color 9F
 echo( 
 echo               *****************************************
 echo               *         MAZAK PROGRAM TRANSFER        *
-echo               *                TOOL                   *
+echo               *          TOOL   "%newver%"            *
 echo               *****************************************
 echo( 
 echo          ****************************************************
